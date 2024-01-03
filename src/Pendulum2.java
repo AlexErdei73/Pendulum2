@@ -7,7 +7,9 @@ public class Pendulum2 {
       double tMax = 100;
       double dt = 0.001;
       Plot plot = new Plot("Theta of DDP in time",0,100,5, -50,50,1);
+      Plot logPlot = new Plot("ln|theta2 - theta1| in t", 0, 100, 5, -50, 3, 1);
       plot.setPointSize(1);
+      logPlot.setPointSize(1);
       for (double t = 0; t < tMax; t += 10*dt) {
         for (int i = 0; i < 10; i++) {
           pendulum1.nextStep();
@@ -17,6 +19,7 @@ public class Pendulum2 {
         plot.addPoint(t, pendulum1.theta);
         plot.setColor(Color.blue);
         plot.addPoint(t, pendulum2.theta);
+        logPlot.addPoint(t, Math.log(Math.abs(pendulum2.theta - pendulum1.theta)));
       }
     }
 }
